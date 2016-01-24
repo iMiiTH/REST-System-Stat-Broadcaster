@@ -4,15 +4,24 @@ import org.hyperic.sigar.Sigar;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.
+ * The MetricRunnable class allows the polling of system stat data
+ * to be separate from incoming requests. Each metric is run in its own
+ * thread, and requests access the cached data that's updated every
+ * sleepInterval.
  */
 public abstract class MetricRunnable {
 
 	protected Sigar sigar;
-	protected final long sleepInterval;
+	protected long sleepInterval;
 
 	public MetricRunnable() {
 		this.sigar = new Sigar();
-		sleepInterval = 0;
+		this.sleepInterval = 1000;
+	}
+
+	public MetricRunnable(long sleepInterval) {
+		this();
+		this.sleepInterval = sleepInterval;
 	}
 
 	protected void sleepThread() {
