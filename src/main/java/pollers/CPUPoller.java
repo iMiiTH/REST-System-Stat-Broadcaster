@@ -6,9 +6,9 @@ import runnables.CPURunnable;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.
+ * A MetricPoller whose metric is CPU Data.
  */
 public class CPUPoller extends MetricPoller {
-	private final Thread thread;
 
 	private volatile Cpu cpu;
 	private volatile Cpu[] cpuList;
@@ -17,12 +17,9 @@ public class CPUPoller extends MetricPoller {
 
 	public CPUPoller() {
 		super();
-		thread = new Thread(new CPURunnable(this));
+		this.thread = new Thread(new CPURunnable(this));
 	}
 
-	/**
-	 * Start the threads that poll sigar for data every 1 second.
-	 */
 	public void start() {
 		thread.start();
 	}
