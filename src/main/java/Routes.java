@@ -1,8 +1,12 @@
 /**
  * Created by mitchellmohorovich on 2016-01-22.
+ * The main class that defines routing for the Spark framework.
  */
 
 import pollers.CPUPoller;
+import pollers.MemPoller;
+
+import java.util.Arrays;
 
 import static spark.Spark.*;
 
@@ -10,13 +14,16 @@ public class Routes {
 	public static void main(String[] args) {
 		CPUPoller cpuPoller = new CPUPoller();
 		cpuPoller.start();
-
 		get("/cpu", (req, res) -> cpuPoller.getCpu());
-		get("/cpu/list", (req, res) -> cpuPoller.getCpuList());
+		get("/cpu/list", (req, res) -> Arrays.deepToString(cpuPoller.getCpuList()));
 		get("/cpu/percentage", (req, res) -> cpuPoller.getCpuPerc());
-		get("/cpu/percentage/list", (req, res) -> cpuPoller.getCpuPercList());
+		get("/cpu/percentage/list", (req, res) -> Arrays.deepToString(cpuPoller.getCpuPercList()));
 
-		get("/ram", (req, res) -> "current ram");
+
+		MemPoller memPoller = new MemPoller();
+		memPoller.start();
+		get("/mem", (req, res) -> memPoller.getMem());
+
 
 		get("/network", (req, res) -> "network");
 		get("/network/upload", (req, res) -> "network upload");
