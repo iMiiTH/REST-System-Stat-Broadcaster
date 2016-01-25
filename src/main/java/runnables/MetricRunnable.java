@@ -9,7 +9,7 @@ import org.hyperic.sigar.Sigar;
  * thread, and requests access the cached data that's updated every
  * sleepInterval.
  */
-public abstract class MetricRunnable {
+public abstract class MetricRunnable implements Runnable {
 
 	protected Sigar sigar;
 	protected long sleepInterval;
@@ -24,6 +24,14 @@ public abstract class MetricRunnable {
 		this.sleepInterval = sleepInterval;
 	}
 
+	@Override
+	public void run() {
+		while (!Thread.interrupted()) {
+			pollAllMetrics();
+			sleepThread();
+		}
+	}
+
 	protected void sleepThread() {
 		try {
 			Thread.sleep(sleepInterval);
@@ -31,5 +39,7 @@ public abstract class MetricRunnable {
 			e.printStackTrace();
 		}
 	}
+
+	protected abstract void pollAllMetrics();
 
 }

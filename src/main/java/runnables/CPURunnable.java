@@ -5,8 +5,9 @@ import pollers.CPUPoller;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.
+ * A Runnable sub class that polls for all CPU data.
  */
-public class CPURunnable extends MetricRunnable implements Runnable {
+public class CPURunnable extends MetricRunnable {
 
 	private CPUPoller cpuPoller;
 
@@ -15,15 +16,7 @@ public class CPURunnable extends MetricRunnable implements Runnable {
 		this.cpuPoller = cpuPoller;
 	}
 
-	@Override
-	public void run() {
-		while (!Thread.interrupted()) {
-			pollAllCpuMetrics();
-			sleepThread();
-		}
-	}
-
-	private void pollAllCpuMetrics() {
+	protected void pollAllMetrics() {
 		pollCpu();
 		pollCpuList();
 		pollCpuPerc();
