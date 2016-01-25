@@ -20,10 +20,6 @@ public class CPUPoller extends MetricPoller {
 		this.thread = new Thread(new CPURunnable(this));
 	}
 
-	public void start() {
-		thread.start();
-	}
-
 	public Cpu getCpu() {
 		return cpu;
 	}

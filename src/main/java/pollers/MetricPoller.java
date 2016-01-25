@@ -19,5 +19,9 @@ public abstract class MetricPoller {
 		this.sigar = new Sigar();
 	}
 
+	public void start() {
+		thread.start();
+	}
+
 }
 
