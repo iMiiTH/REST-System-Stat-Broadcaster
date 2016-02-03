@@ -12,6 +12,7 @@
 
 	<properties>
 		<docker.image.prefix>RESTSystemStatBroadcaster</docker.image.prefix>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
