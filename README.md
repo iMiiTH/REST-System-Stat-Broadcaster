@@ -8,11 +8,11 @@ For people or organizations who want to monitor or keep track of server load, de
 
 ### Deployment
 
-The application is built as a jar. It has a built-in Jetty server and all required files for the Sigar API, so it *should* work on all platforms specified [here](https://support.hyperic.com/display/SIGAR/Home#Home-binaries).
+The application is built as a fat jar, with all dependencies included. When executing the jar, a lib directory will be made in the directory which is where the application will write the necessary library files required to interact with the system. This will take a while on your first run, but every subsequent run will reuse the files allowing for a near instant startup time.
 
 ### API Usage
 
-//Todo
+Data can be fetched via simple GET requests. The data returned is in XML format. A full reference of routes can be found in the wiki, eventually.
 
 ## Dependencies
 
