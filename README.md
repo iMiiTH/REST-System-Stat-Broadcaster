@@ -8,7 +8,7 @@ For people or organizations who want to monitor or keep track of server load, de
 
 ### Deployment
 
-The application is built as a fat jar, with all dependencies included. When executing the jar, a lib directory will be made in the directory which is where the application will write the necessary library files required to interact with the system. This will take a while on your first run, but every subsequent run will reuse the files allowing for a near instant startup time.
+The application is built as a fat jar, with all dependencies included. When executing the jar, a lib directory will be made in the directory which is where the application will write the necessary library files required to interact with the system.
 
 ### API Usage
 
