@@ -1,4 +1,4 @@
-package pollers;
+package com.mohorovich.mitchell.rssb.pollers;
 
 import org.hyperic.sigar.Sigar;
 

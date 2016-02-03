@@ -1,7 +1,7 @@
-package pollers;
+package com.mohorovich.mitchell.rssb.pollers;
 
 import org.hyperic.sigar.Mem;
-import runnables.MemRunnable;
+import com.mohorovich.mitchell.rssb.runnables.MemRunnable;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.

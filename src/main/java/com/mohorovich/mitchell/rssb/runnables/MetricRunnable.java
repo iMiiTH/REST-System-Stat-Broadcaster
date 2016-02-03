@@ -1,4 +1,4 @@
-package runnables;
+package com.mohorovich.mitchell.rssb.runnables;
 
 import org.hyperic.sigar.Sigar;
 

@@ -1,7 +1,7 @@
-package runnables;
+package com.mohorovich.mitchell.rssb.runnables;
 
 import org.hyperic.sigar.SigarException;
-import pollers.CPUPoller;
+import com.mohorovich.mitchell.rssb.pollers.CPUPoller;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.

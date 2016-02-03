@@ -1,8 +1,8 @@
-package pollers;
+package com.mohorovich.mitchell.rssb.pollers;
 
 import org.hyperic.sigar.Cpu;
 import org.hyperic.sigar.CpuPerc;
-import runnables.CPURunnable;
+import com.mohorovich.mitchell.rssb.runnables.CPURunnable;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.

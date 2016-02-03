@@ -1,16 +1,16 @@
-/**
+package com.mohorovich.mitchell.rssb; /**
  * Created by mitchellmohorovich on 2016-01-22.
  * The main class that defines routing for the Spark framework.
  */
 
-import pollers.CPUPoller;
-import pollers.MemPoller;
+import com.mohorovich.mitchell.rssb.pollers.CPUPoller;
+import com.mohorovich.mitchell.rssb.pollers.MemPoller;
 
 import java.util.Arrays;
 
 import static spark.Spark.*;
 
-public class Routes {
+public class Main {
 	public static void main(String[] args) {
 		CPUPoller cpuPoller = new CPUPoller();
 		cpuPoller.start();
