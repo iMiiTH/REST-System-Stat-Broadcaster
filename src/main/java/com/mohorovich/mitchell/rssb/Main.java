@@ -39,11 +39,15 @@ public class Main {
 
 	public static void writeSigarLibToJavaLibPath() throws Exception {
 		File libraryDirectory = new File(System.getProperty("user.dir").concat("/lib"));
-		if(!libraryDirectory.exists()) {
+		if(libraryDirectory.exists()) {
+			System.out.println("Using existing lib directory");
+		} else {
+			System.out.println("Creating new lib directory.");
 			if(!libraryDirectory.mkdir()) {
 				throw new Exception("Could not make lib directory.");
 			}
 		}
+		System.out.print("Writing sigar lib files...");
 		System.setProperty("user.dir", System.getProperty("user.dir").concat("/lib"));
 		System.setProperty("java.library.path", System.getProperty("user.dir"));
 
@@ -51,15 +55,19 @@ public class Main {
 		ZipInputStream zin = new ZipInputStream(in);
 		ZipEntry ze;
 		while ((ze = zin.getNextEntry()) != null) {
-			System.out.println("Unzipping " + ze.getName());
 			FileOutputStream fOut = new FileOutputStream(System.getProperty("java.library.path") + "/" + ze.getName());
-			for (int c = zin.read(); c != -1; c = zin.read()) {
-				fOut.write(c);
+			BufferedOutputStream bos = new BufferedOutputStream(fOut);
+			byte[] buffer = new byte[4096];
+			int bytesRead;
+			while((bytesRead = zin.read(buffer)) > 0) {
+				bos.write(buffer, 0, bytesRead);
 			}
+			bos.flush();
 			zin.closeEntry();
 			fOut.close();
 		}
 		zin.close();
+		System.out.println(" Done.");
 	}
 
 }
