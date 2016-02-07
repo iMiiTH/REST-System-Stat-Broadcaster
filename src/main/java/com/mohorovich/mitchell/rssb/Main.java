@@ -3,12 +3,11 @@ package com.mohorovich.mitchell.rssb; /**
  * The main class that defines routing for the Spark framework.
  */
 
+import com.mohorovich.mitchell.rssb.XMLmetric.XMLCPU;
 import com.mohorovich.mitchell.rssb.pollers.CPUPoller;
 import com.mohorovich.mitchell.rssb.pollers.MemPoller;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -21,10 +20,17 @@ public class Main {
 
 		CPUPoller cpuPoller = new CPUPoller();
 		cpuPoller.start();
+		XMLCPU xmlcpu = new XMLCPU(cpuPoller);
 		get("/cpu", (req, res) -> cpuPoller.getCpu());
 		get("/cpu/list", (req, res) -> Arrays.deepToString(cpuPoller.getCpuList()));
-		get("/cpu/percentage", (req, res) -> cpuPoller.getCpuPerc());
-		get("/cpu/percentage/list", (req, res) -> Arrays.deepToString(cpuPoller.getCpuPercList()));
+		get("/cpu/percentage", (req, res) -> {
+			res.type("text/xml");
+			return xmlcpu.getXMLCPUPercentages();
+		});
+		get("/cpu/percentage/list", (req, res) -> {
+			res.type("text/xml");
+			return xmlcpu.getXMLCPUCorePercentages();
+		});
 
 
 		MemPoller memPoller = new MemPoller();
