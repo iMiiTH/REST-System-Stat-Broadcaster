@@ -4,6 +4,7 @@ package com.mohorovich.mitchell.rssb; /**
  */
 
 import com.mohorovich.mitchell.rssb.XMLmetric.XMLCPU;
+import com.mohorovich.mitchell.rssb.XMLmetric.XMLMem;
 import com.mohorovich.mitchell.rssb.pollers.CPUPoller;
 import com.mohorovich.mitchell.rssb.pollers.MemPoller;
 
@@ -35,7 +36,15 @@ public class Main {
 
 		MemPoller memPoller = new MemPoller();
 		memPoller.start();
-		get("/mem", (req, res) -> memPoller.getMem());
+		XMLMem xmlMem = new XMLMem(memPoller);
+		get("/mem", (req, res) -> {
+			res.type("text/xml");
+			return xmlMem.getXMLMemActual();
+		});
+		get("/mem/percentage", (request, response) -> {
+			response.type("text/xml");
+			return xmlMem.getXMLMemPercentages();
+		});
 
 
 		get("/network", (req, res) -> "network");
@@ -45,11 +54,11 @@ public class Main {
 
 	public static void writeSigarLibToJavaLibPath() throws Exception {
 		File libraryDirectory = new File(System.getProperty("user.dir").concat("/lib"));
-		if(libraryDirectory.exists()) {
+		if (libraryDirectory.exists()) {
 			System.out.println("Using existing lib directory");
 		} else {
 			System.out.println("Creating new lib directory.");
-			if(!libraryDirectory.mkdir()) {
+			if (!libraryDirectory.mkdir()) {
 				throw new Exception("Could not make lib directory.");
 			}
 		}
@@ -65,7 +74,7 @@ public class Main {
 			BufferedOutputStream bos = new BufferedOutputStream(fOut);
 			byte[] buffer = new byte[4096];
 			int bytesRead;
-			while((bytesRead = zin.read(buffer)) > 0) {
+			while ((bytesRead = zin.read(buffer)) > 0) {
 				bos.write(buffer, 0, bytesRead);
 			}
 			bos.flush();
