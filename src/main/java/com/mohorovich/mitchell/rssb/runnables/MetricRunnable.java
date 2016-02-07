@@ -1,6 +1,9 @@
 package com.mohorovich.mitchell.rssb.runnables;
 
+import com.mohorovich.mitchell.rssb.pollers.MetricPoller;
 import org.hyperic.sigar.Sigar;
+
+import java.util.Date;
 
 /**
  * Created by mitchellmohorovich on 2016-01-23.
@@ -13,21 +16,19 @@ public abstract class MetricRunnable implements Runnable {
 
 	protected Sigar sigar;
 	protected long sleepInterval;
+	protected MetricPoller metricPoller;
 
-	public MetricRunnable() {
+	public MetricRunnable(MetricPoller metricPoller) {
 		this.sigar = new Sigar();
 		this.sleepInterval = 1000;
-	}
-
-	public MetricRunnable(long sleepInterval) {
-		this();
-		this.sleepInterval = sleepInterval;
+		this.metricPoller = metricPoller;
 	}
 
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
 			pollAllMetrics();
+			updateRetrieveTime();
 			sleepThread();
 		}
 	}
@@ -41,5 +42,9 @@ public abstract class MetricRunnable implements Runnable {
 	}
 
 	protected abstract void pollAllMetrics();
+
+	protected void updateRetrieveTime() {
+		this.metricPoller.setRetrieveTime(new Date());
+	}
 
 }

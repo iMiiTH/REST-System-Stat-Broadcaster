@@ -12,7 +12,7 @@ public class MemRunnable extends MetricRunnable {
 	private MemPoller memPoller;
 
 	public MemRunnable(MemPoller memPoller) {
-		super();
+		super(memPoller);
 		this.memPoller = memPoller;
 	}
 

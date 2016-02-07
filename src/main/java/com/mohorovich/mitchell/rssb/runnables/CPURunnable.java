@@ -3,6 +3,8 @@ package com.mohorovich.mitchell.rssb.runnables;
 import org.hyperic.sigar.SigarException;
 import com.mohorovich.mitchell.rssb.pollers.CPUPoller;
 
+import java.util.Date;
+
 /**
  * Created by mitchellmohorovich on 2016-01-23.
  * A Runnable sub class that polls for all CPU data.
@@ -12,7 +14,7 @@ public class CPURunnable extends MetricRunnable {
 	private CPUPoller cpuPoller;
 
 	public CPURunnable(CPUPoller cpuPoller) {
-		super();
+		super(cpuPoller);
 		this.cpuPoller = cpuPoller;
 	}
 

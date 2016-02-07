@@ -11,11 +11,12 @@ public class NetRunnable extends MetricRunnable {
 	private NetPoller netPoller;
 
 	public NetRunnable(NetPoller netPoller) {
-		super();
+		super(netPoller);
 		this.netPoller = netPoller;
 	}
 
 	@Override
 	protected void pollAllMetrics() {
 	}
+
 }
